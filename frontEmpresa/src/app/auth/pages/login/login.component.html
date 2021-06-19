@@ -1,0 +1,19 @@
+<div class="text-center mt-5">
+    <form class="form-signin"
+           autocomplete="off"
+           [formGroup]="miFormulario"
+           (ngSubmit)="login()">
+      <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <input type="email" formControlName="email"  class="form-control" placeholder="Email address" required autofocus>
+     <input type="password"  formControlName="password"  class="form-control mt-3" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" 
+              type="submit"
+              [disabled]="miFormulario.invalid">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+</div>
