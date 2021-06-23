@@ -16,12 +16,17 @@ export class ServicesService {
   constructor( private http: HttpClient) { }
 
 
-  registrarServicio( nombre: string, descripcion: string, imagen: string ){
+  registrarServicio( nombre: string, descripcion: string, imagen: File ){
 
-    const url = `${ this.baseUrl }/register`;
-    const body = { nombre, descripcion, imagen };
+    const url = `${ this.baseUrl }/servicios`;
+    //const body = { nombre, descripcion, imagen };
 
-    return this.http.post<ServiciosResponse>( url , body )
+    const fd = new FormData();
+    fd.append('nombre', nombre);
+    fd.append('descripcion', descripcion);
+    fd.append('imagen', imagen);
+    return this.http.post<ServiciosResponse>( url , fd )
+              
 
   }
 }

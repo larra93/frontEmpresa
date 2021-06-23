@@ -14,16 +14,16 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Nombre</label>
-                <input type="email" formControlName="nombre"  class="form-control" id="inputEmail4" placeholder="Nombre">
+                <input type="text" formControlName="nombre"  class="form-control" id="inputEmail4" placeholder="Nombre">
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Descripción</label>
-                <input type="password" formControlName="descripcion"  class="form-control" id="inputPassword4" placeholder="Descripción">
+                <input type="text" formControlName="descripcion"  class="form-control" id="inputPassword4" placeholder="Descripción">
               </div>
 
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Imagen</label>
-                <input type="file">
+                <input type="file" formControlName="imagen" (change)="uploadImage($event)" >
               </div>
             </div>
             
