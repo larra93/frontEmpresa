@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import Swal from 'sweetalert2';
+import { Servicio } from '../interfaces/servicios-interface';
 import { ServicesService } from '../services/servicios.service';
+
 
 @Component({
   selector: 'app-servicios',
@@ -12,7 +15,14 @@ import { ServicesService } from '../services/servicios.service';
 export class ServiciosComponent implements OnInit {
 
 
+   rows = [] as  any;
+
+  ColumnMode = ColumnMode;
+
   file!: File;
+  servicios: Servicio[] = [] ;
+ 
+
 
   miFormulario: FormGroup = this.fb.group({
     nombre:['',[Validators.required, Validators.minLength(6)] ],
@@ -25,9 +35,25 @@ export class ServiciosComponent implements OnInit {
 
   constructor( private fb: FormBuilder,
     private router: Router,
-    private ServicioService: ServicesService ) { }
+    private servicioService: ServicesService ) {
+
+      
+     }
 
   ngOnInit(): void {
+
+    
+    this.cargarServicios();
+  }
+
+  cargarServicios(){
+
+    this.servicioService.getServicios()
+    .subscribe( servicios => {
+     this.rows = servicios;
+ 
+    })
+    
   }
 
  
@@ -43,7 +69,7 @@ export class ServiciosComponent implements OnInit {
 
     const { nombre , descripcion } = this.miFormulario.value;
 
-    this.ServicioService.registrarServicio( nombre, descripcion,this.file )
+    this.servicioService.registrarServicio( nombre, descripcion,this.file )
          .subscribe( res => {
 
           Swal.fire('Exito', 'Registro guardado con exito', 'success');
@@ -53,12 +79,7 @@ export class ServiciosComponent implements OnInit {
          );
          return false;
         
-          /*
-          if( resp === true ){
-            Swal.fire('Exito', 'Registro guardado con exito', 'success');
-          } else{
-            Swal.fire('Error', resp, 'error');
-          }*/
+         
         
   }
 

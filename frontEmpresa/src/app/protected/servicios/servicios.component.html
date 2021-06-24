@@ -8,7 +8,7 @@
     
     <div class="container">
 
-        <form
+       <!-- <form
         [formGroup]="miFormulario"
         (ngSubmit)="registrarServicio()">
             <div class="form-row">
@@ -32,7 +32,33 @@
             
             <button type="submit" [disabled]="miFormulario.invalid" class="btn btn-primary">Enviar</button>
           </form>
+        -->
 
+        <div>
+          <h3>
+            Client-side Paging
+            <small>
+              <a
+                href="https://github.com/swimlane/ngx-datatable/blob/master/src/app/paging/paging-client.component.ts"
+                target="_blank"
+              >
+                Source
+              </a>
+            </small>
+          </h3>
+          <ngx-datatable
+            class="material"
+            [rows]="rows"
+            [columns]="[{ name: 'Nombre' }, { name: 'descripcion' }, { name: 'Imagen' }]"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+          >
+          </ngx-datatable>
+        </div>
+        
 
 
     </div>

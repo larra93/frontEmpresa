@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Servicio, ServiciosResponse } from '../interfaces/servicios-interface';
@@ -27,6 +27,11 @@ export class ServicesService {
     fd.append('imagen', imagen);
     return this.http.post<ServiciosResponse>( url , fd )
               
+  }
 
+ 
+
+  getServicios(): Observable<Servicio[]> {
+    return this.http.get<Servicio[]>(`${ this.baseUrl }/servicios`);
   }
 }
